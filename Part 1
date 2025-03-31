@@ -1,0 +1,34 @@
+data.head()
+data.tail()
+data.shape
+data.info()
+data.describe()
+#T is for transpose of the data exceeds it's limits or it is
+data.describe().T
+data.columns
+data.axes
+data.isnull().sum()
+data.isnull().sum().sum()
+print(data.isnull().sum().sum())
+data.describe(include='all')
+X = data[['carbon_emissions', 'energy_output', 'renewability_index','cost_efficiency']]
+y = data['sustainability']
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+model = LogisticRegression()
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
+y_pred
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+conf_matrix = confusion_matrix(y_test, y_pred)
+sns.heatmap(conf_matrix, annot=True, fmt='d', cmap='Blues')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+plt.title('Confusion Matrix')
+plt.show()
+print(classification_report(y_test, y_pred, target_names=['Not Sustainable','Sustainable']))
+data.corr
+coefficients = pd.DataFrame(model.coef_.T, index=X.columns, columns=['Coefficient'])
+print(coefficients)
+import joblib
+joblib.dump(model, 'lmodel_sustainable.pkl')
