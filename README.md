@@ -1,2 +1,2 @@
-# Air-quality-prediction
-A machine learning project
+#Green AI
+ A Deep learning project on green AI
