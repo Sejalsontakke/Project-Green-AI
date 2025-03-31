@@ -1,0 +1,46 @@
+data.head()
+data.tail()
+data.describe()
+data.shape
+data.isnull().sum().sum()
+data.isnull().sum()
+data.columns
+data.axes
+data.describe().T
+data.info()
+
+scaler = StandardScaler()
+data_scaled = scaler.fit_transform(data)
+print(pd.DataFrame(data_scaled, columns=data.columns).head())
+
+inertia=[]
+k_range = range(1,11)
+for k in k_range:
+  kmeans = KMeans(n_clusters=k,random_state=42)
+  kmeans.fit(data_scaled)
+  inertia.append(kmeans.inertia_)
+
+plt.plot(k_range, inertia, marker='o')
+plt.title('Elbow Method')
+plt.xlabel('Number of clusters (k)')
+plt.ylabel('Inertia')
+plt.show()
+
+k = 7
+kmeans = KMeans(n_clusters=k, random_state=42)
+data['cluster'] = kmeans.fit_predict(data_scaled)
+print(data.head())
+
+sil_score = silhouette_score(data_scaled, data['cluster'])
+print(f'Silhouette Score: {sil_score}')
+
+import seaborn as sns
+import matplotlib.pyplot as plt
+plt.figure(figsize=(8,6))
+sns.scatterplot(x='carbon_emissions', y='pollution_level', hue='cluster', data=data, palette = 'viridis', s=100, alpha=0.7, edgecolor='k')
+plt.title('K-Means Clustering Results')
+plt.xlabel('Carbon Emissions')
+plt.ylabel('Pollution Level')
+plt.legend(title='Cluster', bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.show()
+
