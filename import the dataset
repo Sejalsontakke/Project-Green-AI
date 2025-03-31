@@ -1,1 +1,4 @@
+#part1
 data = pd.read_csv('upload the dataset')
+#part2
+data = pd.read_csv('upload the dataset') #environmental dataset
