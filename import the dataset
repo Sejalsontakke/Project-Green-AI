@@ -1,4 +1,6 @@
 #part1
-data = pd.read_csv('upload the dataset')
+data = pd.read_csv('upload the dataset') #appliance dataset
 #part2
 data = pd.read_csv('upload the dataset') #environmental dataset
+#part3
+data = pd.read_csv('upload the dataset') #green technology dataset
